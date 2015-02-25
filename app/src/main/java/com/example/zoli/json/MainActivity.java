@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.apache.http.client.HttpClient;
+
 
 public class MainActivity extends ActionBarActivity {
+    private HttpConnection mainHttp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +23,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void buttonpressed (View v){
-        Toast.makeText(getApplicationContext(), "hello world",Toast.LENGTH_SHORT).show();
+        String url="http://api.openweathermap.org/data/2.5/weather?q=Budapest&mode=xml";
+//        Toast.makeText(getApplicationContext(), "hello world",Toast.LENGTH_SHORT).show();
+        mainHttp=new HttpConnection(url,getApplicationContext());
+        mainHttp.OpenStream();
+        mainHttp.CloseStream();
 
     }
 
