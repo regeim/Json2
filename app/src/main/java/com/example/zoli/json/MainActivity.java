@@ -20,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void buttonpressed (View v){
-        /*Toast.makeText(getApplicationContext(), "hello world",Toast.LENGTH_SHORT).show();*/
+        Toast.makeText(getApplicationContext(), "hello world",Toast.LENGTH_SHORT).show();
 
     }
 
