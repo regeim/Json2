@@ -9,6 +9,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import org.apache.http.client.HttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -22,11 +27,16 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    public void buttonpressed (View v){
-        String url="http://api.openweathermap.org/data/2.5/weather?q=Budapest&mode=xml";
+    public void buttonpressed (View v) throws JSONException, IOException {
+        String url="http://maps.googleapis.com/maps/api/geocode/json?address=Budapest%20Astoria&sensor=false";
+        String holder;
 //        Toast.makeText(getApplicationContext(), "hello world",Toast.LENGTH_SHORT).show();
         mainHttp=new HttpConnection(url,getApplicationContext());
         mainHttp.OpenStream();
+        mainHttp.getBytes();
+        holder = new String(mainHttp.getBuf(),"UTF-8");
+        JSONObject root=new JSONObject(holder);
+
         mainHttp.CloseStream();
 
     }
