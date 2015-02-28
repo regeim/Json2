@@ -31,12 +31,35 @@ public class MainActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_main);
 
-        Button get_btn=(Button)findViewById(R.id.get_button_id);
+//        Button get_btn=(Button)findViewById(R.id.get_button_id);
+
+        mainHttp=new HttpConnection(url,getApplicationContext());
+        mainHttp.OpenStream();
+        try {
+            mainHttp.getBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (mainHttp.getBuf()!=null){
+            try {
+                holder = new String(mainHttp.getBuf(),"UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+                try {
+            JSONObject root=new JSONObject(holder);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        }
+        mainHttp.CloseStream();
+
 
         final Spinner spinner = (Spinner) findViewById(R.id.realm_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.regions,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.regions,R.layout.spinner_layout);
+        adapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner.setAdapter(adapter);
+        spinner.setSelection(4);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -61,26 +84,14 @@ public class MainActivity extends ActionBarActivity {
         switch (v.getId()){
             case R.id.realm_spinner:
                 selected_item=sp.getSelectedItem().toString();
-                mainHttp=new HttpConnection(url,getApplicationContext());
-                mainHttp.OpenStream();
-                mainHttp.getBytes();
-                if (mainHttp.getBuf()!=null){
-                    holder = new String(mainHttp.getBuf(),"UTF-8");
-                }
-                mainHttp.CloseStream();
+
                 break;
         }
 
     }
-    public void button_pressed (View v) throws JSONException, IOException {
-
-//        Toast.makeText(getApplicationContext(), selected_item,Toast.LENGTH_SHORT).show();
-
-        JSONObject root=new JSONObject(holder);
-
-
-
-    }
+//    public void button_pressed (View v) throws JSONException, IOException {
+//
+//    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
