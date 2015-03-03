@@ -5,6 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="get_data_btn">Get Data!</string>
+    <string name="next_button">Next-></string>
     <string-array name="regions">
         <item>China</item>
         <item>EU</item>

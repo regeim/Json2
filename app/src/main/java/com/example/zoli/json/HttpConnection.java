@@ -51,7 +51,7 @@ private     byte[] buf;
             InputStream ostream = conn.getInputStream();
             this.stream=ostream;
             this.isconnect=true;
-            Toast.makeText(context, "Internet Connected", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Internet Connected", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
