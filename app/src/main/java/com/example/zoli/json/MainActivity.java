@@ -1,11 +1,15 @@
 package com.example.zoli.json;
 
+
+import android.content.Intent;
 import android.os.StrictMode;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -27,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.activity_main);
         if (android.os.Build.VERSION.SDK_INT > 9) { //to have internet access on Android  4.2+
@@ -59,6 +64,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
+
     }
 
 
@@ -90,9 +97,14 @@ public class MainActivity extends ActionBarActivity {
 //        }
 
     }
-//    public void button_pressed (View v) throws JSONException, IOException {
-//
-//   }
+    public void button_pressed (View v) throws JSONException, IOException {
+        switch (v.getId()){
+                case R.id.next_button:
+                    Intent intent=new Intent(this, CharNameActivity.class);
+                    startActivity(intent);
+        }
+
+   }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
