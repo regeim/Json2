@@ -24,11 +24,11 @@ public class ItemListActivity extends Activity {
 
     }
 
-    public static class Header extends Fragment{
-        @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view=inflater.inflate(R.layout.header, container, false);
-            return view;
-        }
-    }
+//    public static class Header extends Fragment{
+//        @Override
+//        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//            View view=inflater.inflate(R.layout.header, container, false);
+//            return view;
+//        }
+//    }
 }
