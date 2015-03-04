@@ -18,8 +18,11 @@ public class CharNameActivity extends Activity {
     public void button_pressed(View v){
         switch (v.getId()){
             case R.id.char_name_back_button:
-                Intent intent=new Intent(this, MainActivity.class);
-                startActivity(intent);
+                Intent intent_back=new Intent(this, MainActivity.class);
+                startActivity(intent_back);
+            case R.id.char_name_next_button:
+                Intent intent_next=new Intent(this, ItemListActivity.class);
+                startActivity(intent_next);
         }
 
     }

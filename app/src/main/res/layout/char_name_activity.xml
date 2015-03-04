@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/char_name_next_button"
-        android:id="@+id/button"
+        android:id="@+id/char_name_next_button"
         android:layout_marginTop="111dp"
         android:layout_below="@+id/name_text"
         android:layout_alignRight="@+id/name_text"
