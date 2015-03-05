@@ -22,13 +22,21 @@ public class ItemListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
-//    public static class Header extends Fragment{
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//            View view=inflater.inflate(R.layout.header, container, false);
-//            return view;
-//        }
-//    }
+    public static class Header extends Fragment{
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view=inflater.inflate(R.layout.header, container, false);
+            return view;
+        }
+    }
+    public static class ItemList extends Fragment{
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view=inflater.inflate(R.layout.item_list_body, container, false);
+            return view;
+        }
+    }
 }
