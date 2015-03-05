@@ -102,6 +102,7 @@ public class MainActivity extends ActionBarActivity {
                 case R.id.next_button:
                     Intent intent=new Intent(this, CharNameActivity.class);
                     startActivity(intent);
+                    break;
         }
 
    }

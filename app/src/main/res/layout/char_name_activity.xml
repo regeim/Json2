@@ -35,7 +35,8 @@
         android:layout_alignRight="@+id/name_text"
         android:layout_alignEnd="@+id/name_text"
         android:layout_marginRight="55dp"
-        android:layout_marginEnd="55dp" />
+        android:layout_marginEnd="55dp"
+        android:onClick="button_pressed"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -43,8 +44,5 @@
         android:layout_height="wrap_content"
         android:text="&lt;-Back"
         android:id="@+id/char_name_back_button"
-        android:layout_alignTop="@+id/button"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"
         android:onClick="button_pressed"/>
 </RelativeLayout>

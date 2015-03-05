@@ -20,9 +20,11 @@ public class CharNameActivity extends Activity {
             case R.id.char_name_back_button:
                 Intent intent_back=new Intent(this, MainActivity.class);
                 startActivity(intent_back);
+                break;
             case R.id.char_name_next_button:
                 Intent intent_next=new Intent(this, ItemListActivity.class);
                 startActivity(intent_next);
+                break;
         }
 
     }

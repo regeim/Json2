@@ -5,9 +5,9 @@
 
 
     <fragment
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:name="com.example.zoli.json.ItemListActivity.Header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.example.zoli.json.fragments.HeaderFragment"
         android:id="@+id/fragment"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -16,9 +16,9 @@
     <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="com.example.zoli.json.ItemListActivity.ItemList"
+        android:name="com.example.zoli.json.fragments.ItemListFragment"
         android:id="@+id/fragment2"
+        tools:layout="@layout/item_list_body"
         android:layout_below="@+id/fragment"
-        android:layout_centerHorizontal="true"
-        tools:layout="@layout/item_list_body" />
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

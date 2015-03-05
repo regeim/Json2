@@ -4,7 +4,7 @@
     android:layout_height="fill_parent">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.50"
         android:id="@+id/header_left">
@@ -20,7 +20,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.50"
         android:id="@+id/header_right">
