@@ -16,6 +16,9 @@ public class ItemListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.item_list_body, container, false);
+
+
+
         return view;
     }
 }

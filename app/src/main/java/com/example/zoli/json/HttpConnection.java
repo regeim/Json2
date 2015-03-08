@@ -71,7 +71,7 @@ private     byte[] buf;
     public void getBytes () throws IOException {
 
         int len;
-        int size = 1024;
+        int size = 2048;
         byte[] tempbuf;
         if (this.stream!=null) {
 //            if (this.stream instanceof ByteArrayInputStream) {

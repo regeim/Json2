@@ -13,20 +13,31 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
     private HttpConnection main_Http;
-    String selected_item;
-    String url="http://eu.battle.net/api/wow/realm/status";
-    String holder;
-    ProcessJSON main_json;
-    ArrayList<String> realm_list;
+    private String selected_item;
+//    private String url="http://en.wikipedia.org/w/api.php?action=parse&page=Mango&format=json&prop=links";
+    private String url="http://eu.battle.net/api/wow/realm/status";
+    private String holder;
+    private ProcessJSON main_json;
+    private List realm_list;
+    private String chosen_realm;
+    InputStream inputStream;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +57,12 @@ public class MainActivity extends ActionBarActivity {
         region_adapter.setDropDownViewResource(R.layout.spinner_layout);
         region_spinner.setAdapter(region_adapter);
         region_spinner.setSelection(4);
+
         region_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    spinner_item_selected(view,region_spinner);
+                   spinner_item_selected(view,region_spinner,1);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -64,43 +76,78 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+//        Spook example = new Spook();
+//        example.setName("Mr. Spock");
+//        example.setRace("Vulcan");
+//        example.setSex("male");
+//        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//        String flat = gson.toJson(example);
+//
+//        Toast.makeText(this.getApplicationContext(),flat, Toast.LENGTH_LONG).show();
+
 
 
     }
 
 
-    public void spinner_item_selected (View v, Spinner sp)throws JSONException, IOException{
-//        switch (v.getId()){
-//            case R.id.region_spinner:
-        selected_item=sp.getSelectedItem().toString();
-        try {
-            main_Http=new HttpConnection(url,getApplicationContext());
-            main_Http.OpenStream();
-            main_Http.getBytes();
+    public void spinner_item_selected (View v, Spinner sp, Integer integer)throws JSONException, IOException{
+        switch (integer){
+        case 1:
+            selected_item=sp.getSelectedItem().toString();
 
-            if (main_Http.getBuf()!=null){
-                holder = new String(main_Http.getBuf(),"UTF-8");
-                main_json=new ProcessJSON(holder);
-                realm_list=main_json.getWorld_list();
-            }
-            main_Http.CloseStream();
+                    main_Http=new HttpConnection(url,getApplicationContext());
+                    main_Http.OpenStream();
+//                    main_Http.getBytes();
 
-        }catch (IOException e) {
-            e.printStackTrace();
+                    if (main_Http.getStream()!=null){
+//                        holder = new String(main_Http.getBuf(),"UTF-8");
+//                        main_json=new ProcessJSON(holder,1);
+//                        realm_list=main_json.getWorld_list();
+                       inputStream=main_Http.getStream();
+                        main_json=new ProcessJSON (inputStream);
+                        realm_list=main_json.createFromJSON();
+
+                    }
+                    main_Http.CloseStream();
+
+
+                final Spinner realm_spinner=(Spinner)findViewById(R.id.realm_spinner);
+                if (realm_list!=null){
+                    ArrayAdapter<String> realm_adapter=new ArrayAdapter(this,R.layout.spinner_layout,realm_list);
+                    realm_spinner.setAdapter(realm_adapter);
+                    realm_spinner.setSelection(0);
+                    realm_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            try {
+                                spinner_item_selected(view,realm_spinner,2);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                }
+                break;
+        case 2:
+            chosen_realm=sp.getSelectedItem().toString();
+            break;
         }
-        final Spinner realm_spinner=(Spinner)findViewById(R.id.realm_spinner);
-        if (realm_list!=null){
-            ArrayAdapter<String> realm_adapter=new ArrayAdapter(this,R.layout.spinner_layout,realm_list);
-            realm_spinner.setAdapter(realm_adapter);
-        }
-//                break;
-//        }
+
+
 
     }
     public void button_pressed (View v) throws JSONException, IOException {
         switch (v.getId()){
                 case R.id.next_button:
                     Intent intent=new Intent(this, CharNameActivity.class);
+                    intent.putExtra("realm",chosen_realm);
                     startActivity(intent);
                     break;
         }
