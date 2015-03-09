@@ -76,16 +76,6 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-//        Spook example = new Spook();
-//        example.setName("Mr. Spock");
-//        example.setRace("Vulcan");
-//        example.setSex("male");
-//        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-//        String flat = gson.toJson(example);
-//
-//        Toast.makeText(this.getApplicationContext(),flat, Toast.LENGTH_LONG).show();
-
-
 
     }
 
@@ -97,12 +87,10 @@ public class MainActivity extends ActionBarActivity {
 
                     main_Http=new HttpConnection(url,getApplicationContext());
                     main_Http.OpenStream();
-//                    main_Http.getBytes();
+
 
                     if (main_Http.getStream()!=null){
-//                        holder = new String(main_Http.getBuf(),"UTF-8");
-//                        main_json=new ProcessJSON(holder,1);
-//                        realm_list=main_json.getWorld_list();
+
                        inputStream=main_Http.getStream();
                         main_json=new ProcessJSON (inputStream);
                         realm_list=main_json.createFromJSON();

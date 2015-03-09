@@ -35,13 +35,6 @@ public class ProcessJSON{
     InputStream inputStream;
 
 
-    public ProcessJSON (String s,Integer integer){
-        this.data_holder=s;
-        this.switch_case=integer;
-//        this.LoadInJSON();
-
-    }
-
     public ProcessJSON (InputStream inputStream){
         this.inputStream=inputStream;
     }
@@ -54,40 +47,6 @@ public class ProcessJSON{
         return url;
     }
 
-//    public List readJsonStream() throws IOException {
-//        JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
-//        try {
-//
-//            return readMessagesArray(reader);}
-//            finally {
-//                reader.close();
-//            }
-//        }
-//
-//    public List readMessagesArray(JsonReader reader) throws IOException {
-//        List messages = new ArrayList();
-//
-//        reader.beginArray();
-//        while (reader.hasNext()) {
-//            messages.add(readMessage(reader));
-//        }
-//        reader.endArray();
-//        return messages;
-//    }
-//
-//    public Boolean readMessage(JsonReader reader) throws IOException {
-//        reader.beginObject();
-//        while (reader.hasNext()) {
-//            String name = reader.nextName();
-//            if (name.equals("realms")) {
-//               good=true;
-//            }  else {
-//               good=false;
-//            }
-//        }
-//
-//        return good;
-//    }
 
 
 
@@ -104,44 +63,6 @@ public class ProcessJSON{
 
 
 
-//        jsonReader.beginObject();
-//        while( jsonReader.hasNext() ){
-//            final String name = jsonReader.nextName();
-//
-//            if( name.equals( "parse" ) && jsonReader.peek()!= JsonToken.NULL ) {
-//                jsonReader.beginObject();
-//                while( jsonReader.hasNext() ) {
-//                    final String innerName = jsonReader.nextName();
-//
-//                    if( innerName.equals( "links" ) && jsonReader.peek()!= JsonToken.NULL) {
-//                        jsonReader.beginArray();
-//                        while( jsonReader.hasNext() ) {
-//                            jsonReader.beginObject();
-//                            while( jsonReader.hasNext() ) {
-//                                final String innerInnerName = jsonReader.nextName();
-//
-//                                if( innerInnerName.equals( "*" )&& jsonReader.peek()!= JsonToken.NULL) {
-//                                    temp=(jsonReader.nextString());
-//
-//
-//                                }
-//                                else {
-//                                    jsonReader.skipValue();
-//                                }
-//                            }
-//                            jsonReader.endObject();
-//                        }
-//                        jsonReader.endArray();
-//                    }
-//                    else jsonReader.skipValue();
-//                }
-//                jsonReader.endObject();
-//            }
-//            else
-//            jsonReader.skipValue();
-//        }
-//        jsonReader.endObject();
-//    }
         jsonReader.beginObject();
         while( jsonReader.hasNext() ){
             final String name = jsonReader.nextName();
@@ -176,48 +97,6 @@ public class ProcessJSON{
     }
 
 
-
-//    private void LoadInJSON () {
-//        switch (switch_case){
-//            case 1:
-//            world_list=new ArrayList<String>();
-//            try {
-//                root=new JSONObject(data_holder);
-//                root_array=root.getJSONArray("realms");
-//                for (int i = 0; i < root_array.length(); i++) {
-//                    root=root_array.getJSONObject(i);
-//                    temp=root.getString("name");
-//                    world_list.add(temp);
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            case 2:
-//                try {
-//                    root=new JSONObject(data_holder);
-//                    root_array=root.getJSONArray("files");
-//                    url=root_array.getJSONObject(0).getString("url");
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            case 3:
-//                item_list=new ArrayList<String>();
-//                try {
-//                    root=new JSONObject(data_holder);
-//                    root_array=root.getJSONArray("auctions");
-//                    for (int i = 0; i < root_array.length(); i++) {
-//                        root=root_array.getJSONObject(i);
-//                        temp=root.getString("auc");
-//                        item_list.add(temp);
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//        }
-//
-//
-//    }
 
 
 }

@@ -68,24 +68,5 @@ private     byte[] buf;
         Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
     }
-    public void getBytes () throws IOException {
-
-        int len;
-        int size = 2048;
-        byte[] tempbuf;
-        if (this.stream!=null) {
-//            if (this.stream instanceof ByteArrayInputStream) {
-//                size = this.stream.available();
-//                this.buf = new byte[size];
-//                len = this.stream.read(buf, 0, size);
-//            } else {
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                tempbuf = new byte[size];
-                while ((len = this.stream.read(tempbuf, 0, size)) != -1)
-                    bos.write(tempbuf, 0, len);
-                this.buf = bos.toByteArray();
-//            }
-        }
-    }
 
 }
