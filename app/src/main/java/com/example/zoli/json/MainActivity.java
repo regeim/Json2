@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                   spinner_item_selected(view,region_spinner,1);
+                   spinner_item_selected(view,region_spinner,"region_spinner");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -80,9 +80,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void spinner_item_selected (View v, Spinner sp, Integer integer)throws JSONException, IOException{
-        switch (integer){
-        case 1:
+    public void spinner_item_selected (View v, Spinner sp, String s)throws JSONException, IOException{
+        switch (s){
+        case "region_spinner":
             selected_item=sp.getSelectedItem().toString();
 
                     main_Http=new HttpConnection(url,getApplicationContext());
@@ -93,7 +93,7 @@ public class MainActivity extends ActionBarActivity {
 
                        inputStream=main_Http.getStream();
                         main_json=new ProcessJSON (inputStream);
-                        realm_list=main_json.createFromJSON();
+                        realm_list=main_json.createFromJSON("realm");
 
                     }
                     main_Http.CloseStream();
@@ -108,7 +108,7 @@ public class MainActivity extends ActionBarActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             try {
-                                spinner_item_selected(view,realm_spinner,2);
+                                spinner_item_selected(view,realm_spinner,"realm_spinner");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             } catch (IOException e) {
@@ -123,7 +123,7 @@ public class MainActivity extends ActionBarActivity {
                     });
                 }
                 break;
-        case 2:
+        case "realm_spinner":
             chosen_realm=sp.getSelectedItem().toString();
             break;
         }

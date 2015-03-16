@@ -50,50 +50,135 @@ public class ProcessJSON{
 
 
 
-    public List createFromJSON() throws IOException {
-        String temp2;
-        List realm_names = new ArrayList();
+    public List createFromJSON(String s) throws IOException {
+        String temp;
+
+        String temp_integer;
+        List list = new ArrayList();
         InputStreamReader inputStreamReader = null;
         BufferedReader bufferedReader = null;
         JsonReader jsonReader = null;
+        inputStreamReader = new InputStreamReader(this.inputStream);
+        bufferedReader = new BufferedReader(inputStreamReader);
+        jsonReader = new JsonReader(inputStreamReader);
+        String char_name;
 
-            inputStreamReader = new InputStreamReader(this.inputStream);
-            bufferedReader = new BufferedReader(inputStreamReader);
-            jsonReader = new JsonReader(inputStreamReader);
+        switch (s){
 
+        case "realm":
+            jsonReader.beginObject();
+            while( jsonReader.hasNext() ){
+                final String name = jsonReader.nextName();
 
+                if( name.equals( "realms" ) && jsonReader.peek()!= JsonToken.NULL ) {
 
-        jsonReader.beginObject();
-        while( jsonReader.hasNext() ){
-            final String name = jsonReader.nextName();
-
-            if( name.equals( "realms" ) && jsonReader.peek()!= JsonToken.NULL ) {
-
-                jsonReader.beginArray();
-                while( jsonReader.hasNext() ) {
-
-                    jsonReader.beginObject();
+                    jsonReader.beginArray();
                     while( jsonReader.hasNext() ) {
 
-                        final String innerInnerName = jsonReader.nextName();
-                        if( innerInnerName.equals( "name" )&& jsonReader.peek()!= JsonToken.NULL) {
+                        jsonReader.beginObject();
+                        while( jsonReader.hasNext() ) {
 
-                            temp2=(jsonReader.nextString());
-                            realm_names.add(temp2);
+                            final String innerInnerName = jsonReader.nextName();
+                            if( innerInnerName.equals( "name" )&& jsonReader.peek()!= JsonToken.NULL) {
+
+                                temp=(jsonReader.nextString());
+                                list.add(temp);
+                            }
+                            else {
+                                jsonReader.skipValue();
+                            }
                         }
-                        else {
-                            jsonReader.skipValue();
-                        }
+                        jsonReader.endObject();
                     }
-                    jsonReader.endObject();
+                    jsonReader.endArray();
                 }
-                jsonReader.endArray();
-            }
-            else
-                jsonReader.skipValue();
+                else
+                    jsonReader.skipValue();
+                 }
+                jsonReader.endObject();
+            break;
+            case "url":
+                jsonReader.beginObject();
+                while( jsonReader.hasNext() ){
+                    final String name = jsonReader.nextName();
+
+                    if( name.equals( "files" ) && jsonReader.peek()!= JsonToken.NULL ) {
+
+                        jsonReader.beginArray();
+                        while( jsonReader.hasNext() ) {
+
+                            jsonReader.beginObject();
+                            while( jsonReader.hasNext() ) {
+
+                                final String innerInnerName = jsonReader.nextName();
+                                if( innerInnerName.equals( "url" )&& jsonReader.peek()!= JsonToken.NULL) {
+
+                                    temp=(jsonReader.nextString());
+                                    list.add(temp);
+                                }
+                                else {
+                                    jsonReader.skipValue();
+                                }
+                            }
+                            jsonReader.endObject();
+                        }
+                        jsonReader.endArray();
+                    }
+                    else
+                        jsonReader.skipValue();
+                }
+                jsonReader.endObject();
+                break;
+            case "item_list":
+                jsonReader.beginObject();
+                while( jsonReader.hasNext() ){
+                    final String name = jsonReader.nextName();
+
+                    if( name.equals( "auctions" ) && jsonReader.peek()!= JsonToken.NULL ) {
+
+                        jsonReader.beginObject();
+                            while( jsonReader.hasNext() ) {
+
+                                final String innerName = jsonReader.nextName();
+                                if( innerName.equals( "auctions" )&& jsonReader.peek()!= JsonToken.NULL) {
+
+                                    jsonReader.beginArray();
+                                    while( jsonReader.hasNext() ) {
+                                        jsonReader.beginObject();
+                                        while( jsonReader.hasNext() ) {
+                                            final String innerInnerName = jsonReader.nextName();
+                                            if( innerInnerName.equals( "item" )&& jsonReader.peek()!= JsonToken.NULL) {
+
+                                                temp_integer=(jsonReader.nextString());
+                                                jsonReader.nextName();
+                                                char_name=(jsonReader.nextString());
+                                                if (char_name.equals("Enrupt")){
+                                                    list.add(temp_integer);
+
+                                                 }
+                                            }
+                                            else {
+                                                jsonReader.skipValue();
+                                            }
+
+                                        }jsonReader.endObject();
+
+                                    }jsonReader.endArray();
+                                }
+                                else {
+                                    jsonReader.skipValue();
+                                }
+                            }
+                            jsonReader.endObject();
+
+                    }
+                    else
+                        jsonReader.skipValue();
+                }
+                jsonReader.endObject();
+
         }
-        jsonReader.endObject();
-        return realm_names;
+        return list;
     }
 
 
