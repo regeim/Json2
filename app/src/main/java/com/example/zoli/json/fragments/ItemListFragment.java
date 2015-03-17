@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.devspark.progressfragment.ProgressFragment;
 import com.example.zoli.json.HttpConnection;
 import com.example.zoli.json.ItemListActivity;
 import com.example.zoli.json.ProcessJSON;
@@ -34,66 +35,37 @@ public class ItemListFragment extends Fragment {
     private List item_list;
     private byte[] array_holder;
     private String array_length;
+    private Spinner item_list_spinner;
+    private ListView item_list_view;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.item_list_body, container, false);
-
-        final Spinner item_list_spinner = (Spinner)view.findViewById(R.id.item_list_spinner);
-        final ListView item_list_view = (ListView)view.findViewById(R.id.item_list_view);
-
-
-
-        InputStream inputStream;
-
-        main_Http=new HttpConnection(url,getActivity());
-        main_Http.OpenStream();
-
-
-        if (main_Http.getStream()!=null){
-
-            inputStream=main_Http.getStream();
-            main_json=new ProcessJSON (inputStream);
-            try {
-                auction_url=main_json.createFromJSON("url");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            main_Http.CloseStream();
-
-        }
-        main_Http=new HttpConnection(auction_url.get(0).toString(),getActivity());
-        main_Http.OpenStream();
-
-        if (main_Http.getStream()!=null){
-            inputStream=main_Http.getStream();
-            main_json=new ProcessJSON (inputStream);
-            try {
-                item_list=main_json.createFromJSON("item_list");
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            main_Http.CloseStream();
-
-
-        }
-
-//        Toast.makeText(getActivity(), auction_url.get(0).toString(), Toast.LENGTH_LONG).show();
-
-
+        item_list_spinner = (Spinner)view.findViewById(R.id.item_list_spinner);
+        item_list_view = (ListView)view.findViewById(R.id.item_list_view);
         if (item_list!=null){
-        ArrayAdapter item_list_adapter = new ArrayAdapter(getActivity(),R.layout.spinner_layout,item_list);
-        ArrayAdapter item_list_view_adapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,item_list);
-        item_list_adapter.setDropDownViewResource(R.layout.spinner_layout);
-        item_list_spinner.setAdapter(item_list_adapter);
-        item_list_view.setAdapter(item_list_view_adapter);
+            ArrayAdapter item_list_adapter = new ArrayAdapter(getActivity(),R.layout.spinner_layout,item_list);
+            ArrayAdapter item_list_view_adapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,item_list);
+            item_list_adapter.setDropDownViewResource(R.layout.spinner_layout);
+            item_list_spinner.setAdapter(item_list_adapter);
+            item_list_view.setAdapter(item_list_view_adapter);
         }
-
         return view;
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+
+
+
+
+
+
 
     }
 }
