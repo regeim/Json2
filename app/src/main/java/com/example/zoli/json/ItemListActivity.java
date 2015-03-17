@@ -60,42 +60,6 @@ public class ItemListActivity extends FragmentActivity {
 
         fragmentTransaction.commit();
 
-        InputStream inputStream;
-
-        main_Http=new HttpConnection(url,this);
-        main_Http.OpenStream();
-
-
-        if (main_Http.getStream()!=null){
-
-            inputStream=main_Http.getStream();
-            main_json=new ProcessJSON (inputStream);
-            try {
-                auction_url=main_json.createFromJSON("url");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            main_Http.CloseStream();
-
-        }
-        main_Http=new HttpConnection(auction_url.get(0).toString(),this);
-        main_Http.OpenStream();
-
-        if (main_Http.getStream()!=null){
-            inputStream=main_Http.getStream();
-            main_json=new ProcessJSON (inputStream);
-            try {
-                item_list=main_json.createFromJSON("item_list");
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            main_Http.CloseStream();
-
-
-        }
 
 
 
