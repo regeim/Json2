@@ -1,6 +1,7 @@
 package com.example.zoli.json.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ import java.util.List;
 /**
  * Created by Zoli on 2015.03.05..
  */
-public class ItemListFragment extends Fragment {
+public class ItemListFragment extends ProgressFragment {
 
     private String url="http://eu.battle.net/api/wow/auction/data/outland";
     private String realm_auction_url;
@@ -39,14 +40,45 @@ public class ItemListFragment extends Fragment {
     private Spinner item_list_spinner;
     private ListView item_list_view;
     private Button setData_btn;
+    private View mContentView;
+    private Handler mHandler;
+    private Runnable mShowContentRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+
+            setContentShown(true);
+        }
+
+    };
+
+    public static ProgressFragment newInstance() {
+        ProgressFragment fragment = new ProgressFragment();
+
+        return fragment;
+    }
+
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.item_list_body, container, false);
+    //        View view=inflater.inflate(R.layout.item_list_body, container, false);
 
-        setData_btn=(Button)view.findViewById(R.id.button);
+//        setData_btn=(Button)view.findViewById(R.id.button);
+//
+//        setData_btn.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                            // Perform action on click
+//                            setData();
+//                            }
+//        });
+//
+//        item_list_view = (ListView)view.findViewById(R.id.item_list_view);
+//
+//        return view;
+        mContentView = inflater.inflate(R.layout.item_list_body, null);
+                setData_btn=(Button)mContentView.findViewById(R.id.button);
 
         setData_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -55,18 +87,29 @@ public class ItemListFragment extends Fragment {
                             }
         });
 
-        item_list_view = (ListView)view.findViewById(R.id.item_list_view);
-
-        return view;
+        item_list_view = (ListView)mContentView.findViewById(R.id.item_list_view);
+        return inflater.inflate(R.layout.fragment_custom_progress, container, false);
 
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        setContentShown(true);
+        setContentView(mContentView);
+
      }
 
+    private void obtainData() {
+        // Show indeterminate progress
+        mHandler = new Handler();
+        mHandler.postDelayed(mShowContentRunnable, 3000);
+    }
+
     public void setData (){
+//        setContentShown(false);
+
         InputStream inputStream;
 
         main_Http=new HttpConnection(url,getActivity());
@@ -112,6 +155,6 @@ public class ItemListFragment extends Fragment {
 
         }
 
-
+//        setContentShown(true);
     }
 }
