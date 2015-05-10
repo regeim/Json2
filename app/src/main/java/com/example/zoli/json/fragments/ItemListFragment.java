@@ -15,12 +15,15 @@ import android.widget.Toast;
 
 import com.devspark.progressfragment.ProgressFragment;
 import com.example.zoli.json.HttpConnection;
+import com.example.zoli.json.Item;
 import com.example.zoli.json.ItemListActivity;
 import com.example.zoli.json.ProcessJSON;
+import com.example.zoli.json.ProcessJSON2;
 import com.example.zoli.json.R;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,11 +33,12 @@ public class ItemListFragment extends ProgressFragment {
 
     private String url="http://eu.battle.net/api/wow/auction/data/outland";
     private String realm_auction_url;
-    private ProcessJSON main_json;
+    private ProcessJSON url_json;
+    private ProcessJSON2 main_json;
     private HttpConnection main_Http;
     private String holder;
     private List<String> auction_url;
-    private List item_list;
+    private ArrayList<Item> item_list;
     private byte[] array_holder;
     private String array_length;
     private Spinner item_list_spinner;
@@ -119,9 +123,9 @@ public class ItemListFragment extends ProgressFragment {
         if (main_Http.getStream()!=null){
 
             inputStream=main_Http.getStream();
-            main_json=new ProcessJSON (inputStream);
+            url_json=new ProcessJSON (inputStream);
             try {
-                auction_url=main_json.createFromJSON("url");
+                auction_url=url_json.createFromJSON("url");
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -134,9 +138,9 @@ public class ItemListFragment extends ProgressFragment {
 
         if (main_Http.getStream()!=null){
             inputStream=main_Http.getStream();
-            main_json=new ProcessJSON (inputStream);
+            main_json=new ProcessJSON2 (inputStream);
             try {
-                item_list=main_json.createFromJSON("item_list");
+                item_list=main_json.createFromJSON2();
 
 
             } catch (IOException e) {

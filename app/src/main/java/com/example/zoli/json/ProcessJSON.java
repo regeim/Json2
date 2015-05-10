@@ -23,28 +23,12 @@ import com.google.gson.stream.JsonReader;
  */
 public class ProcessJSON{
 
-    private String data_holder;
-    private ArrayList<String> world_list;
-    private ArrayList<String> item_list;
-    private JSONObject root;
-    private JSONArray root_array;
-    private int switch_case;
-    private String temp;
-    private String url;
-    boolean good;
+
     InputStream inputStream;
 
 
     public ProcessJSON (InputStream inputStream){
         this.inputStream=inputStream;
-    }
-
-    public ArrayList<String> getWorld_list() {
-        return world_list;
-    }
-
-    public String getUrl() {
-        return url;
     }
 
 
@@ -54,7 +38,8 @@ public class ProcessJSON{
         String temp;
 
         String temp_integer;
-        List list = new ArrayList();
+        ArrayList list = new ArrayList ();
+
         InputStreamReader inputStreamReader = null;
         BufferedReader bufferedReader = null;
         JsonReader jsonReader = null;
@@ -129,53 +114,7 @@ public class ProcessJSON{
                 }
                 jsonReader.endObject();
                 break;
-            case "item_list":
-                jsonReader.beginObject();
-                while( jsonReader.hasNext() ){
-                    final String name = jsonReader.nextName();
 
-                    if( name.equals( "auctions" ) && jsonReader.peek()!= JsonToken.NULL ) {
-
-                        jsonReader.beginObject();
-                            while( jsonReader.hasNext() ) {
-
-                                final String innerName = jsonReader.nextName();
-                                if( innerName.equals( "auctions" )&& jsonReader.peek()!= JsonToken.NULL) {
-
-                                    jsonReader.beginArray();
-                                    while( jsonReader.hasNext() ) {
-                                        jsonReader.beginObject();
-                                        while( jsonReader.hasNext() ) {
-                                            final String innerInnerName = jsonReader.nextName();
-                                            if( innerInnerName.equals( "item" )&& jsonReader.peek()!= JsonToken.NULL) {
-
-                                                temp_integer=(jsonReader.nextString());
-                                                jsonReader.nextName();
-                                                char_name=(jsonReader.nextString());
-                                                if (char_name.equals("Enrupt")){
-                                                    list.add(temp_integer);
-
-                                                 }
-                                            }
-                                            else {
-                                                jsonReader.skipValue();
-                                            }
-
-                                        }jsonReader.endObject();
-
-                                    }jsonReader.endArray();
-                                }
-                                else {
-                                    jsonReader.skipValue();
-                                }
-                            }
-                            jsonReader.endObject();
-
-                    }
-                    else
-                        jsonReader.skipValue();
-                }
-                jsonReader.endObject();
 
         }
         return list;
