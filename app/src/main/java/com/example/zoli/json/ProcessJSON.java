@@ -46,6 +46,7 @@ public class ProcessJSON{
         inputStreamReader = new InputStreamReader(this.inputStream);
         bufferedReader = new BufferedReader(inputStreamReader);
         jsonReader = new JsonReader(inputStreamReader);
+        jsonReader.setLenient(true);
         String char_name;
 
         switch (s){
@@ -115,6 +116,36 @@ public class ProcessJSON{
                 jsonReader.endObject();
                 break;
 
+<<<<<<< HEAD
+=======
+                                                temp_integer=(jsonReader.nextString());
+                                                jsonReader.nextName();
+                                                char_name=(jsonReader.nextString());
+                                                if (char_name.equals("Executiedk")){
+                                                    list.add(temp_integer);
+
+                                                 }
+                                            }
+                                            else {
+                                                jsonReader.skipValue();
+                                            }
+
+                                        }jsonReader.endObject();
+
+                                    }jsonReader.endArray();
+                                }
+                                else {
+                                    jsonReader.skipValue();
+                                }
+                            }
+                            jsonReader.endObject();
+
+                    }
+                    else
+                        jsonReader.skipValue();
+                }
+                jsonReader.endObject();
+>>>>>>> origin/master
 
         }
         return list;
