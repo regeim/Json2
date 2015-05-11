@@ -56,10 +56,7 @@ public class ItemListFragment extends ProgressFragment {
         @Override
         public void handleMessage(Message msg) {
             if (item_list!=null){
-                ArrayAdapter <Item> item_list_adapter = new ArrayAdapter<Item>(getActivity(),R.layout.spinner_layout,item_list);
                 ArrayAdapter <Item> item_list_view_adapter=new ArrayAdapter<Item>(getActivity(),android.R.layout.simple_list_item_1,item_list);
-                item_list_adapter.setDropDownViewResource(R.layout.spinner_layout);
-
                 item_list_view.setAdapter(item_list_view_adapter);
             }
             setContentShown(true);
@@ -114,41 +111,6 @@ public class ItemListFragment extends ProgressFragment {
         json_thread.start();
 
     }
-
-
-
-
-/*<<<<<<< HEAD
-            inputStream=main_Http.getStream();
-            url_json=new ProcessJSON (inputStream);
-            try {
-                auction_url=url_json.createFromJSON("url");
-=======
-                }
-            json_handler.sendEmptyMessage(0);
->>>>>>> origin/master*/
-/*
-            }
-        };
-
-        Thread json_thread= new Thread(runnable);
-        json_thread.start();
-
-    }
-
-<<<<<<< HEAD
-        if (main_Http.getStream()!=null){
-            inputStream=main_Http.getStream();
-            main_json=new ProcessJSON2 (inputStream);
-            try {
-                item_list=main_json.createFromJSON2();
-=======
-    public static ProgressFragment newInstance() {
-        ProgressFragment fragment = new ProgressFragment();
->>>>>>> origin/master*/
-/*
-        return fragment;
-    }*/
 
 
 
