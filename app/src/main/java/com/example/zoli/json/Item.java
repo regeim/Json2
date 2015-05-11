@@ -48,5 +48,10 @@ public class Item {
         this.time_left=time_left;
     }*/
 
+    @Override
+    public String toString() {
+        return this.auction_number + "-" + this.owner;
+    }
+
 
 }

@@ -70,7 +70,7 @@ public class ProcessJSON2{
                                             temp_integer=(jsonReader.nextString());
                                             jsonReader.nextName();
                                             char_name=(jsonReader.nextString());
-                                            if (char_name.equals("Peele")){
+                                            if (char_name.equals("Xisteria")){
                                                 temp_Item.setAuction_number(temp_integer);
                                                 temp_Item.setOwner(char_name);
                                                 list.add(temp_Item);

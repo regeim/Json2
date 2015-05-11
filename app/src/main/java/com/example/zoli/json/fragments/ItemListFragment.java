@@ -33,23 +33,20 @@ import java.util.List;
 public class ItemListFragment extends ProgressFragment {
 
     private String url="http://eu.battle.net/api/wow/auction/data/outland";
-<<<<<<< HEAD
-    private String realm_auction_url;
+
     private ProcessJSON url_json;
     private ProcessJSON2 main_json;
-=======
-    private ProcessJSON main_json;
->>>>>>> origin/master
+
+
+
     private HttpConnection main_Http;
     private List<String> auction_url;
-<<<<<<< HEAD
+
     private ArrayList<Item> item_list;
     private byte[] array_holder;
     private String array_length;
     private Spinner item_list_spinner;
-=======
-    private List item_list;
->>>>>>> origin/master
+
     private ListView item_list_view;
     private View mContentView;
     private View progressView;
@@ -59,8 +56,8 @@ public class ItemListFragment extends ProgressFragment {
         @Override
         public void handleMessage(Message msg) {
             if (item_list!=null){
-                ArrayAdapter item_list_adapter = new ArrayAdapter(getActivity(),R.layout.spinner_layout,item_list);
-                ArrayAdapter item_list_view_adapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,item_list);
+                ArrayAdapter <Item> item_list_adapter = new ArrayAdapter<Item>(getActivity(),R.layout.spinner_layout,item_list);
+                ArrayAdapter <Item> item_list_view_adapter=new ArrayAdapter<Item>(getActivity(),android.R.layout.simple_list_item_1,item_list);
                 item_list_adapter.setDropDownViewResource(R.layout.spinner_layout);
 
                 item_list_view.setAdapter(item_list_view_adapter);
@@ -85,9 +82,9 @@ public class ItemListFragment extends ProgressFragment {
                 if (main_Http.getStream()!=null){
 
                     inputStream=main_Http.getStream();
-                    main_json=new ProcessJSON (inputStream);
+                    url_json=new ProcessJSON (inputStream);
                     try {
-                        auction_url=main_json.createFromJSON("url");
+                        auction_url=url_json.createFromJSON("url");
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -100,20 +97,28 @@ public class ItemListFragment extends ProgressFragment {
 
                 if (main_Http.getStream()!=null){
                     inputStream=main_Http.getStream();
-                    main_json=new ProcessJSON (inputStream);
+                    main_json=new ProcessJSON2 (inputStream);
                     try {
-                        item_list=main_json.createFromJSON("item_list");
+                        item_list=main_json.createFromJSON2();
 
 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    main_Http.CloseStream();
+                    main_Http.CloseStream();}
+                json_handler.sendEmptyMessage(0);
+
+
+            }};
+        Thread json_thread= new Thread(runnable);
+        json_thread.start();
+
+    }
 
 
 
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
             inputStream=main_Http.getStream();
             url_json=new ProcessJSON (inputStream);
             try {
@@ -121,8 +126,8 @@ public class ItemListFragment extends ProgressFragment {
 =======
                 }
             json_handler.sendEmptyMessage(0);
->>>>>>> origin/master
-
+>>>>>>> origin/master*/
+/*
             }
         };
 
@@ -140,10 +145,10 @@ public class ItemListFragment extends ProgressFragment {
 =======
     public static ProgressFragment newInstance() {
         ProgressFragment fragment = new ProgressFragment();
->>>>>>> origin/master
-
+>>>>>>> origin/master*/
+/*
         return fragment;
-    }
+    }*/
 
 
 
