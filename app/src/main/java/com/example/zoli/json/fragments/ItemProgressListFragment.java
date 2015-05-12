@@ -4,20 +4,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.devspark.progressfragment.ProgressFragment;
+import com.devspark.progressfragment.ProgressListFragment;
 import com.example.zoli.json.HttpConnection;
 import com.example.zoli.json.Item;
-import com.example.zoli.json.ItemListActivity;
 import com.example.zoli.json.ProcessJSON;
 import com.example.zoli.json.ProcessJSON2;
 import com.example.zoli.json.R;
@@ -26,11 +21,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import android.widget.FrameLayout.LayoutParams;
 
 /**
  * Created by Zoli on 2015.03.05..
  */
-public class ItemListFragment extends ProgressFragment {
+public class ItemProgressListFragment extends ProgressListFragment {
 
     private String url="http://eu.battle.net/api/wow/auction/data/outland";
 
@@ -57,9 +53,9 @@ public class ItemListFragment extends ProgressFragment {
         public void handleMessage(Message msg) {
             if (item_list!=null){
                 ArrayAdapter <Item> item_list_view_adapter=new ArrayAdapter<Item>(getActivity(),android.R.layout.simple_list_item_1,item_list);
-                item_list_view.setAdapter(item_list_view_adapter);
+                setListAdapter(item_list_view_adapter);
             }
-            setContentShown(true);
+            setListShown(true);
         }
     };
 
@@ -107,6 +103,8 @@ public class ItemListFragment extends ProgressFragment {
 
 
             }};
+
+        setListShown(false);
         Thread json_thread= new Thread(runnable);
         json_thread.start();
 
@@ -114,26 +112,23 @@ public class ItemListFragment extends ProgressFragment {
 
 
 
+    public static ItemProgressListFragment newInstance() {
+        ItemProgressListFragment fragment = new ItemProgressListFragment();
+        return fragment;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        mContentView = inflater.inflate(R.layout.item_list_body, container, false);
-
-        progressView = inflater.inflate(R.layout.fragment_custom_progress, container, false);
-
-        return progressView;
-
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        item_list_view = (ListView)mContentView.findViewById(R.id.item_list_view);
+        setEmptyText(R.string.empty);
         setData();
-        setContentView(mContentView);
 
-     }
+    }
 
 }

@@ -1,24 +1,13 @@
 package com.example.zoli.json;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.support.v4.app.FragmentManager;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.zoli.json.fragments.HeaderFragment;
-import com.example.zoli.json.fragments.ItemListFragment;
+import com.example.zoli.json.fragments.ItemProgressListFragment;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -55,7 +44,7 @@ public class ItemListActivity extends FragmentActivity {
         HeaderFragment fragment = new HeaderFragment();
         fragmentTransaction.add(R.id.header_container, fragment);
 
-        ItemListFragment fragment1= new ItemListFragment();
+        ItemProgressListFragment fragment1= new ItemProgressListFragment();
         fragmentTransaction.add(R.id.item_list_container,fragment1);
 
         fragmentTransaction.commit();
