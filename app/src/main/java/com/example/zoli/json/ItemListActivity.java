@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.example.zoli.json.fragments.HeaderFragment;
+import com.example.zoli.json.fragments.ItemListFragment;
 import com.example.zoli.json.fragments.ItemProgressListFragment;
 
 import java.util.List;

@@ -39,7 +39,7 @@ public class ProcessJSON2{
 
         String temp_integer;
         ArrayList<Item> list = new ArrayList<Item>();
-        Item temp_Item=new Item();
+        Item temp_Item;
         InputStreamReader inputStreamReader = null;
         BufferedReader bufferedReader = null;
         JsonReader jsonReader = null;
@@ -50,6 +50,8 @@ public class ProcessJSON2{
 
          jsonReader.beginObject();
                 while( jsonReader.hasNext() ){
+
+
                     final String name = jsonReader.nextName();
 
                     if( name.equals( "auctions" ) && jsonReader.peek()!= JsonToken.NULL ) {
@@ -71,6 +73,7 @@ public class ProcessJSON2{
                                             jsonReader.nextName();
                                             char_name=(jsonReader.nextString());
                                             if (char_name.equals("Alchriz")){
+                                                temp_Item=new Item();
                                                 temp_Item.setAuction_number(temp_integer);
                                                 temp_Item.setOwner(char_name);
                                                 list.add(temp_Item);

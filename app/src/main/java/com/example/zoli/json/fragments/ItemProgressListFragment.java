@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -46,6 +47,8 @@ public class ItemProgressListFragment extends ProgressListFragment {
     private ListView item_list_view;
     private View mContentView;
     private View progressView;
+
+    private static final String TAG ="ItemProgressListFragment";
 
 
     Handler json_handler = new Handler(){
@@ -129,6 +132,12 @@ public class ItemProgressListFragment extends ProgressListFragment {
         setEmptyText(R.string.empty);
         setData();
 
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Item i = (Item)(getListAdapter()).getItem(position);
+        Log.d(TAG, i.getAuction_number() + " was clicked");
     }
 
 }

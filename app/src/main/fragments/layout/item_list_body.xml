@@ -5,12 +5,12 @@
 
 
 
-    <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/test_button_string"-->
-        <!--android:id="@+id/button"-->
-        <!--android:layout_gravity="center_horizontal" />-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_button_string"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="wrap_content"
