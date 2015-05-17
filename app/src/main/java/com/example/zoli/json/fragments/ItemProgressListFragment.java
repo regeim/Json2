@@ -7,7 +7,9 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -23,6 +25,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.TextView;
 
 /**
  * Created by Zoli on 2015.03.05..
@@ -55,7 +58,8 @@ public class ItemProgressListFragment extends ProgressListFragment {
         @Override
         public void handleMessage(Message msg) {
             if (item_list!=null){
-                ArrayAdapter <Item> item_list_view_adapter=new ArrayAdapter<Item>(getActivity(),android.R.layout.simple_list_item_1,item_list);
+                /*ArrayAdapter <Item> item_list_view_adapter=new ArrayAdapter<Item>(getActivity(),android.R.layout.simple_list_item_1,item_list);*/
+                ItemListAdapter item_list_view_adapter=new ItemListAdapter(item_list);
                 setListAdapter(item_list_view_adapter);
             }
             setListShown(true);
@@ -137,7 +141,38 @@ public class ItemProgressListFragment extends ProgressListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Item i = (Item)(getListAdapter()).getItem(position);
-        Log.d(TAG, i.getAuction_number() + " was clicked");
+        Log.d(TAG, i.getId() + " was clicked");
     }
+    private class ItemListAdapter extends ArrayAdapter <Item> {
 
+        public ItemListAdapter (ArrayList<Item> items) {
+            super(getActivity(), 0, items);
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // If we weren't given a view, inflate one
+            if (convertView == null) {
+                convertView = getActivity().getLayoutInflater()
+                        .inflate(R.layout.item_list, null);
+            }
+
+            // Configure the view for this Crime
+            Item i = getItem(position);
+
+            TextView titleTextView =
+                    (TextView)convertView.findViewById(R.id.item_text);
+            titleTextView.setText(i.getAuction_number());
+            TextView dateTextView =
+                    (TextView)convertView.findViewById(R.id.owner_text);
+            dateTextView.setText(i.getOwner());
+            CheckBox solvedCheckBox =
+                    (CheckBox)convertView.findViewById(R.id.item_list_checkBox);
+            solvedCheckBox.setChecked(i.getIsSelected());
+
+            return convertView;
+        }
+
+
+
+    }
 }

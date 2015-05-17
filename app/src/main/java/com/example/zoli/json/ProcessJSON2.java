@@ -37,7 +37,8 @@ public class ProcessJSON2{
     public ArrayList<Item> createFromJSON2() throws IOException {
         String temp;
 
-        String temp_integer;
+        String temp_item_number;
+        String temp_id;
         ArrayList<Item> list = new ArrayList<Item>();
         Item temp_Item;
         InputStreamReader inputStreamReader = null;
@@ -67,22 +68,26 @@ public class ProcessJSON2{
                                     jsonReader.beginObject();
                                     while( jsonReader.hasNext() ) {
                                         final String innerInnerName = jsonReader.nextName();
-                                        if( innerInnerName.equals( "item" )&& jsonReader.peek()!= JsonToken.NULL) {
-
-                                            temp_integer=(jsonReader.nextString());
+                                        if (innerInnerName.equals("auc")&& jsonReader.peek()!= JsonToken.NULL){
+                                            temp_id=(jsonReader.nextString());
+                                            jsonReader.nextName();
+                                            temp_item_number=(jsonReader.nextString());
                                             jsonReader.nextName();
                                             char_name=(jsonReader.nextString());
-                                            if (char_name.equals("Alchriz")){
+                                            if (char_name.equals("Sinri")){
                                                 temp_Item=new Item();
-                                                temp_Item.setAuction_number(temp_integer);
+                                                temp_Item.setId(temp_id);
+                                                temp_Item.setAuction_number(temp_item_number);
                                                 temp_Item.setOwner(char_name);
                                                 list.add(temp_Item);
 
                                             }
-                                        }
-                                        else {
+
+
+                                        } else {
                                             jsonReader.skipValue();
                                         }
+
 
                                     }jsonReader.endObject();
 

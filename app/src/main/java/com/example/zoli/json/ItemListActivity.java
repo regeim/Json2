@@ -43,6 +43,10 @@ public class ItemListActivity extends FragmentActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         HeaderFragment fragment = new HeaderFragment();
+        Bundle args = new Bundle();
+        args.putString("realm", chosen_realm);
+        args.putString("name", name_of_char);
+        fragment.setArguments(args);
         fragmentTransaction.add(R.id.header_container, fragment);
 
         ItemProgressListFragment fragment1= new ItemProgressListFragment();

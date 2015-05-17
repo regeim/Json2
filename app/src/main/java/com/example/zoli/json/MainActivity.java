@@ -12,6 +12,7 @@ import android.view.View;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class MainActivity extends ActionBarActivity {
     private List realm_list;
     private String chosen_realm;
     InputStream inputStream;
+    private EditText mText;
 
 
 
@@ -56,11 +58,12 @@ public class MainActivity extends ActionBarActivity {
         ArrayAdapter<CharSequence> region_adapter = ArrayAdapter.createFromResource(this,R.array.regions,R.layout.spinner_layout);
         region_adapter.setDropDownViewResource(R.layout.spinner_layout);
         region_spinner.setAdapter(region_adapter);
-        region_spinner.setSelection(4);
+        region_spinner.setSelection(0);
 
         region_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position!=0){
                 try {
                    spinner_item_selected(view,region_spinner,"region_spinner");
                 } catch (JSONException e) {
@@ -69,12 +72,15 @@ public class MainActivity extends ActionBarActivity {
                     e.printStackTrace();
                 }
             }
+            }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+
+        mText=(EditText)findViewById(R.id.name_text);
 
 
     }
@@ -134,8 +140,9 @@ public class MainActivity extends ActionBarActivity {
     public void button_pressed (View v) throws JSONException, IOException {
         switch (v.getId()){
                 case R.id.next_button:
-                    Intent intent=new Intent(this, CharNameActivity.class);
+                    Intent intent=new Intent(this, ItemListActivity.class);
                     intent.putExtra("realm",chosen_realm);
+                    intent.putExtra("name",mText.getText().toString());
                     startActivity(intent);
                     break;
         }

@@ -20,6 +20,7 @@
     <string name="empty">No Data</string>
     <string name="menu_refresh">Refresh</string>
     <string-array name="regions">
+        <item>...</item>
         <item>China</item>
         <item>EU</item>
         <item>Korea</item>

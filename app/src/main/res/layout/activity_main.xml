@@ -30,6 +30,28 @@
         android:layout_below="@+id/region_spinner"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="57dp" />
+<!--    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Please enter the name of you character"
+        android:id="@+id/name_label"
+        android:textSize="30dp"
+        android:maxWidth="300dp"
+        android:gravity="center"
+        android:layout_marginTop="84dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />-->
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/name_text"
+        android:ems="12"
+        android:layout_below="@+id/realm_spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp" />
+
 
     <Button
         style="?android:attr/buttonStyleSmall"

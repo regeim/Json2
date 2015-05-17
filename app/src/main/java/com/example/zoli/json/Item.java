@@ -4,8 +4,10 @@ package com.example.zoli.json;
  * Created by Zoli on 2015.05.10..
  */
 public class Item {
+    private String id;
     private String owner;
     private String auction_number;
+    private Boolean isSelected=true;
    /* private String buyout;
     private String time_left;*/
 
@@ -25,7 +27,22 @@ public class Item {
         this.auction_number = auction_number;
     }
 
-/*    public String getBuyout() {
+    public Boolean getIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    /*    public String getBuyout() {
         return buyout;
     }
 
