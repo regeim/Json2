@@ -32,8 +32,10 @@ public class ProcessJSON2{
     }
 
 
-
-
+    /*public ArrayList<Item> createFromJSON2() throws IOException {
+        return null;
+    }
+*/
     public ArrayList<Item> createFromJSON2() throws IOException {
         String temp;
 
@@ -74,7 +76,7 @@ public class ProcessJSON2{
                                             temp_item_number=(jsonReader.nextString());
                                             jsonReader.nextName();
                                             char_name=(jsonReader.nextString());
-                                            if (char_name.equals("Sinri")){
+                                            if (char_name.equals("Donzantos")){
                                                 temp_Item=new Item();
                                                 temp_Item.setId(temp_id);
                                                 temp_Item.setAuction_number(temp_item_number);

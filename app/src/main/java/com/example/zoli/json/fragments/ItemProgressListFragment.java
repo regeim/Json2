@@ -1,11 +1,11 @@
 package com.example.zoli.json.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import android.widget.FrameLayout.LayoutParams;
+
 import android.widget.TextView;
 
 /**
@@ -53,6 +53,23 @@ public class ItemProgressListFragment extends ProgressListFragment {
 
     private static final String TAG ="ItemProgressListFragment";
 
+    ItemListInterface activityCommander;
+
+    public interface ItemListInterface {
+        public void setItemList(ArrayList<Item> itemList);
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            activityCommander = (ItemListInterface)activity;
+        }catch (ClassCastException e){
+            throw new ClassCastException(activity.toString());
+        }
+    }
+
 
     Handler json_handler = new Handler(){
         @Override
@@ -61,6 +78,8 @@ public class ItemProgressListFragment extends ProgressListFragment {
                 /*ArrayAdapter <Item> item_list_view_adapter=new ArrayAdapter<Item>(getActivity(),android.R.layout.simple_list_item_1,item_list);*/
                 ItemListAdapter item_list_view_adapter=new ItemListAdapter(item_list);
                 setListAdapter(item_list_view_adapter);
+                activityCommander.setItemList(item_list);
+
             }
             setListShown(true);
         }

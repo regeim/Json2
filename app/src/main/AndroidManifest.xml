@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CharNameActivity" ></activity>
         <activity android:name=".ItemListActivity" ></activity>
+        <service android:enabled="true" android:name=".MyService" />
     </application>
 
 </manifest>

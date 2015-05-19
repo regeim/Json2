@@ -4,17 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 
 import com.example.zoli.json.fragments.HeaderFragment;
 import com.example.zoli.json.fragments.ItemListFragment;
 import com.example.zoli.json.fragments.ItemProgressListFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Zoli on 2015.03.03..
  */
-public class ItemListActivity extends FragmentActivity {
+public class ItemListActivity extends FragmentActivity implements ItemProgressListFragment.ItemListInterface{
     private String chosen_realm;
     private String name_of_char;
     private String url="http://eu.battle.net/api/wow/auction/data/outland";
@@ -26,6 +28,8 @@ public class ItemListActivity extends FragmentActivity {
     private List item_list;
     private byte[] array_holder;
     private String array_length;
+
+
 
 
     @Override
@@ -55,11 +59,11 @@ public class ItemListActivity extends FragmentActivity {
         fragmentTransaction.commit();
 
 
-
-
-
-
     }
 
-
+    @Override
+    public void setItemList(ArrayList<Item> itemList) {
+        HeaderFragment fragment= (HeaderFragment)getSupportFragmentManager().findFragmentById(R.id.header_container);
+        fragment.setItemList(itemList);
+    }
 }

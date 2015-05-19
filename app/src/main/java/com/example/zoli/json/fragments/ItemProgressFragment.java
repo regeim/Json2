@@ -1,5 +1,6 @@
 package com.example.zoli.json.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -51,6 +52,8 @@ public class ItemProgressFragment extends ProgressFragment {
     private ListView item_list_view;
     private View mContentView;
     private View progressView;
+
+
 
 
     Handler json_handler = new Handler(){
@@ -136,6 +139,7 @@ public class ItemProgressFragment extends ProgressFragment {
         setContentView(mContentView);
 
      }
+
 
 
 

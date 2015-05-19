@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 
+import com.example.zoli.json.fragments.HeaderFragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -84,6 +85,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
+
 
 
     public void spinner_item_selected (View v, Spinner sp, String s)throws JSONException, IOException{

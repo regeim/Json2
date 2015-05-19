@@ -23,7 +23,32 @@
             android:layout_toRightOf="@id/header_left_text"
 
             android:padding="20dp"/>
-    </RelativeLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:id="@+id/start_button"
+        android:layout_alignBottom="@+id/header_right_text"
+        android:layout_toRightOf="@+id/header_right_text"
+        android:layout_toEndOf="@+id/header_right_text"
+
+        android:minWidth="40dp"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop"
+        android:id="@+id/stop_button"
+        android:layout_below="@+id/start_button"
+        android:layout_toRightOf="@+id/header_right_text"
+        android:layout_toEndOf="@+id/header_right_text"
+
+        android:minWidth="40dp"/>
+
+</RelativeLayout>
 
 
 
