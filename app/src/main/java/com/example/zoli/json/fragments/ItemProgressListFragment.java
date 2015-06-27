@@ -40,6 +40,7 @@ public class ItemProgressListFragment extends ProgressListFragment {
 
 
     private HttpConnection main_Http;
+    private HttpConnection main_Http2;
     private List<String> auction_url;
 
     private ArrayList<Item> item_list;
@@ -111,11 +112,11 @@ public class ItemProgressListFragment extends ProgressListFragment {
                     main_Http.CloseStream();
 
                 }
-                main_Http=new HttpConnection(auction_url.get(0).toString(),getActivity());
-                main_Http.OpenStream();
+                main_Http2=new HttpConnection(auction_url.get(0).toString(),getActivity());
+                main_Http2.OpenStream();
 
-                if (main_Http.getStream()!=null){
-                    inputStream=main_Http.getStream();
+                if (main_Http2.getStream()!=null){
+                    inputStream=main_Http2.getStream();
                     main_json=new ProcessJSON2 (inputStream);
                     try {
                         item_list=main_json.createFromJSON2();
@@ -124,7 +125,7 @@ public class ItemProgressListFragment extends ProgressListFragment {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    main_Http.CloseStream();}
+                    main_Http2.CloseStream();}
                 json_handler.sendEmptyMessage(0);
 
 

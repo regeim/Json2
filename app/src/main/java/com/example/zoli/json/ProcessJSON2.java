@@ -76,7 +76,7 @@ public class ProcessJSON2{
                                             temp_item_number=(jsonReader.nextString());
                                             jsonReader.nextName();
                                             char_name=(jsonReader.nextString());
-                                            if (char_name.equals("Donzantos")){
+                                            if (char_name.equals("Mysteque")){
                                                 temp_Item=new Item();
                                                 temp_Item.setId(temp_id);
                                                 temp_Item.setAuction_number(temp_item_number);
