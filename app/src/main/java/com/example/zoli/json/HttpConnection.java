@@ -43,8 +43,8 @@ private     byte[] buf;
             URL url = new URL(this.url);
             HttpURLConnection conn = (HttpURLConnection)
                     url.openConnection();
-            conn.setReadTimeout(100000);
-            conn.setConnectTimeout(150000);
+            conn.setReadTimeout(1000);
+            conn.setConnectTimeout(1500);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.connect();

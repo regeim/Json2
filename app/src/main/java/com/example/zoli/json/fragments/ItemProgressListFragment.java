@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.devspark.progressfragment.ProgressListFragment;
 import com.example.zoli.json.HttpConnection;
@@ -20,12 +20,17 @@ import com.example.zoli.json.ProcessJSON;
 import com.example.zoli.json.ProcessJSON2;
 import com.example.zoli.json.R;
 
+/*import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;*/
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.widget.TextView;
 
 /**
  * Created by Zoli on 2015.03.05..
@@ -33,7 +38,9 @@ import android.widget.TextView;
 public class ItemProgressListFragment extends ProgressListFragment {
 
     private String url="http://eu.battle.net/api/wow/auction/data/outland";
-
+   /* private String url2="http://188.143.106.70:90/z/z.json";*/
+    private String url2="http://regeim.ddns.net/z/z.json";
+    /*private String url2="http://eu.battle.net/auction-data/ef92b9868d1316c1066e9fb5e6d979a0/auctions.json";*/
     private ProcessJSON url_json;
     private ProcessJSON2 main_json;
 
@@ -52,7 +59,7 @@ public class ItemProgressListFragment extends ProgressListFragment {
     private View mContentView;
     private View progressView;
 
-    private static final String TAG ="ItemProgressListFragment";
+
 
     ItemListInterface activityCommander;
 
@@ -95,7 +102,23 @@ public class ItemProgressListFragment extends ProgressListFragment {
 
                 InputStream inputStream;
 
-                main_Http=new HttpConnection(url,getActivity());
+                /*HttpClient client = new DefaultHttpClient();
+                HttpGet request = new HttpGet("http://regeim.ddns.net/z/z.json");
+
+                try {
+                    HttpResponse response = client.execute(request);
+                    HttpEntity entity = response.getEntity();
+
+                    //
+                    // Read the contents of an entity and return it as a String.
+                    //
+                    String content = EntityUtils.toString(entity);
+                    System.out.println(content);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+
+                /*main_Http=new HttpConnection(url,getActivity());
                 main_Http.OpenStream();
 
 
@@ -111,12 +134,13 @@ public class ItemProgressListFragment extends ProgressListFragment {
                     }
                     main_Http.CloseStream();
 
-                }
-                main_Http2=new HttpConnection(auction_url.get(0).toString(),getActivity());
+                }*/
+                main_Http2=new HttpConnection(url2,getActivity());
                 main_Http2.OpenStream();
-
+                inputStream=main_Http2.getStream();
+                array_length=inputStream.toString();
                 if (main_Http2.getStream()!=null){
-                    inputStream=main_Http2.getStream();
+
                     main_json=new ProcessJSON2 (inputStream);
                     try {
                         item_list=main_json.createFromJSON2();
@@ -161,7 +185,7 @@ public class ItemProgressListFragment extends ProgressListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Item i = (Item)(getListAdapter()).getItem(position);
-        Log.d(TAG, i.getId() + " was clicked");
+       /* Log.d(TAG, i.getId() + " was clicked");*/
     }
     private class ItemListAdapter extends ArrayAdapter <Item> {
 

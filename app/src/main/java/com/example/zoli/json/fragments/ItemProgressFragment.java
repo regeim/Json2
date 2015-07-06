@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class ItemProgressFragment extends ProgressFragment {
 
-    private String url="http://eu.battle.net/api/wow/auction/data/outland";
+    private String url="http://regeim.ddns.net/results_outland.txt";
 
     private ProcessJSON url_json;
     private ProcessJSON2 main_json;
@@ -76,7 +76,7 @@ public class ItemProgressFragment extends ProgressFragment {
 
                 InputStream inputStream;
 
-                main_Http=new HttpConnection(url,getActivity());
+                /*main_Http=new HttpConnection(url,getActivity());
                 main_Http.OpenStream();
 
 
@@ -92,8 +92,8 @@ public class ItemProgressFragment extends ProgressFragment {
                     }
                     main_Http.CloseStream();
 
-                }
-                main_Http=new HttpConnection(auction_url.get(0).toString(),getActivity());
+                }*/
+                main_Http=new HttpConnection("url",getActivity());
                 main_Http.OpenStream();
 
                 if (main_Http.getStream()!=null){

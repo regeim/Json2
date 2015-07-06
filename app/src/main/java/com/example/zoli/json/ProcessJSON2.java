@@ -1,22 +1,12 @@
 package com.example.zoli.json;
 
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Message;
-
+import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
-import com.google.gson.stream.JsonReader;
 
 /**
  * Created by Zoli on 2015.02.25..
@@ -44,11 +34,15 @@ public class ProcessJSON2{
         ArrayList<Item> list = new ArrayList<Item>();
         Item temp_Item;
         InputStreamReader inputStreamReader = null;
-        BufferedReader bufferedReader = null;
+
         JsonReader jsonReader = null;
         inputStreamReader = new InputStreamReader(this.inputStream);
-        bufferedReader = new BufferedReader(inputStreamReader);
+
         jsonReader = new JsonReader(inputStreamReader);
+       /* StringWriter writer = new StringWriter();
+        IOUtils.copy(inputStream, writer, "UTF-8");
+        String theString = writer.toString();*/
+
         String char_name;
 
          jsonReader.beginObject();
@@ -76,7 +70,7 @@ public class ProcessJSON2{
                                             temp_item_number=(jsonReader.nextString());
                                             jsonReader.nextName();
                                             char_name=(jsonReader.nextString());
-                                            if (char_name.equals("Mysteque")){
+                                            if (char_name.equals("Mahuizoh")){
                                                 temp_Item=new Item();
                                                 temp_Item.setId(temp_id);
                                                 temp_Item.setAuction_number(temp_item_number);
@@ -106,6 +100,7 @@ public class ProcessJSON2{
                         jsonReader.skipValue();
                 }
                 jsonReader.endObject();
+
 
 
         return list;}
